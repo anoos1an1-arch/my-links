@@ -1,0 +1,313 @@
+<!-- index.html
+     HTML + CSS + JavaScript | Static site | GitHub Pages compatible
+     التعديل: غيّر الاسم والرابط داخل مصفوفة links في أسفل الملف.
+-->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="روابط متعددة بتصميم ثلاثي الأبعاد">
+  <title>روابطي</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #080a12;
+      --card: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.14);
+      --text: #ffffff;
+      --muted: #9da3b5;
+      --accent: #00d9ff;
+      --accent-2: #7c3aed;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Tahoma, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.20), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.15), transparent 30%),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(900px, calc(100% - 32px));
+      margin: auto;
+      padding: 55px 0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .logo {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      font-size: 38px;
+      background: linear-gradient(145deg, #151a2d, #080a12);
+      border: 1px solid var(--border);
+      box-shadow:
+        12px 12px 25px rgba(0, 0, 0, 0.5),
+        -8px -8px 20px rgba(255, 255, 255, 0.03),
+        inset 0 0 20px rgba(0, 217, 255, 0.08);
+      transform: perspective(500px) rotateX(8deg);
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 46px);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .link-card {
+      position: relative;
+      min-height: 145px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 25px;
+      text-decoration: none;
+      color: var(--text);
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.10),
+        rgba(255, 255, 255, 0.035)
+      );
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+
+      transform:
+        perspective(900px)
+        rotateX(4deg)
+        rotateY(-4deg);
+
+      box-shadow:
+        15px 18px 30px rgba(0, 0, 0, 0.45),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.08);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(
+        120deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.08),
+        transparent 60%
+      );
+      transform: translateX(-60%);
+      transition: transform 0.6s ease;
+    }
+
+    .link-card:hover {
+      transform:
+        perspective(900px)
+        rotateX(0deg)
+        rotateY(0deg)
+        translateY(-8px)
+        scale(1.02);
+
+      border-color: rgba(0, 217, 255, 0.5);
+
+      box-shadow:
+        20px 28px 45px rgba(0, 0, 0, 0.55),
+        0 0 30px rgba(0, 217, 255, 0.12);
+    }
+
+    .link-card:hover::before {
+      transform: translateX(60%);
+    }
+
+    .icon {
+      flex: 0 0 65px;
+      width: 65px;
+      height: 65px;
+      display: grid;
+      place-items: center;
+      border-radius: 19px;
+      font-size: 30px;
+      background: linear-gradient(145deg, #20263b, #0d101c);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow:
+        7px 8px 15px rgba(0, 0, 0, 0.4),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.06);
+    }
+
+    .info {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+
+    .info h2 {
+      font-size: 20px;
+      margin-bottom: 7px;
+    }
+
+    .info p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .arrow {
+      margin-right: auto;
+      color: var(--accent);
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .link-card:hover .arrow {
+      transform: translateX(-5px);
+    }
+
+    footer {
+      margin-top: 45px;
+      text-align: center;
+      color: #656b7d;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 35px 0;
+      }
+
+      .links {
+        grid-template-columns: 1fr;
+      }
+
+      .link-card {
+        min-height: 125px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header>
+      <div class="logo">🔗</div>
+      <h1>روابطي</h1>
+      <p>اختر الرابط الذي تريد زيارته</p>
+    </header>
+
+    <section class="links" id="linksContainer"></section>
+
+    <footer>
+      جميع الروابط في مكان واحد
+    </footer>
+
+  </main>
+
+  <script>
+    /*
+      ============================================================
+      أضف روابطك هنا
+      ============================================================
+
+      name        = الاسم الذي سيظهر على البطاقة
+      description = الوصف الصغير تحت الاسم
+      url         = الرابط الذي سيفتح عند الضغط
+      icon        = الأيقونة
+    */
+
+    const links = [
+      {
+        name: "تلجرام 1",
+        description: "قناة التلجرام الأولى",
+        url: "https://t.me/your_channel_1",
+        icon: "✈️"
+      },
+
+      {
+        name: "تلجرام 2",
+        description: "قناة التلجرام الثانية",
+        url: "https://t.me/your_channel_2",
+        icon: "✈️"
+      },
+
+      {
+        name: "رابط 3",
+        description: "الموقع أو الخدمة الثالثة",
+        url: "https://example.com",
+        icon: "🌐"
+      },
+
+      {
+        name: "رابط 4",
+        description: "رابط إضافي",
+        url: "https://example.com",
+        icon: "🚀"
+      }
+    ];
+
+    const container = document.getElementById("linksContainer");
+
+    links.forEach((link) => {
+      const card = document.createElement("a");
+
+      card.className = "link-card";
+      card.href = link.url;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+
+      card.innerHTML = `
+        <div class="icon">${escapeHtml(link.icon)}</div>
+
+        <div class="info">
+          <h2>${escapeHtml(link.name)}</h2>
+          <p>${escapeHtml(link.description)}</p>
+        </div>
+
+        <div class="arrow">←</div>
+      `;
+
+      container.appendChild(card);
+    });
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+  </script>
+
+</body>
+  </html>
